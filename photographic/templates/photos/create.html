@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photographic</title>
+</head>
+<body>
+<form action="{% url "photos:create" %}" method="post">
+    <h1>Create new photo post</h1>
+    {% csrf_token %}
+    <p>
+        <label>Image URL:</label><br>
+        <input name="image-url" type="url">
+    </p>
+    <p>
+        <label>Caption:</label><br>
+        <textarea name="caption"></textarea>
+    </p>
+    <p>
+        <label>Author:</label><br>
+        <input name="author" type="text">
+    </p>
+    <p>
+        <button type="submit">Create photo</button>
+        <a href="{% url "photos:photo_list" %}">« Back</a>
+    </p>
+</form>
+</body>
+</html>

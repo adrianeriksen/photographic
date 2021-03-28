@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Photographic</title>
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
 </head>
 <body>
 <p><a href="{% url "photos:create" %}">Upload new photo</a></p>

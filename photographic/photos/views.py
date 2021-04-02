@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -13,11 +15,13 @@ def photo_list(request):
 
 def create_photo(request):
     if request.method == "POST":
-        image_url = request.POST["image-url"]
+        photo_object = request.FILES["photo"]
         caption = request.POST["caption"]
         author = request.POST["author"]
 
-        photo = Photo(photo=image_url, caption=caption, author=author)
+        photo = Photo(photo=photo_object, caption=caption, author=author)
+        extension = photo.photo.name.split(".")[-1]
+        photo.photo.name = str(uuid4()) + "." + extension
         photo.save()
 
         if photo.id:

@@ -25,3 +25,12 @@ DATABASES = {
         "PORT": os.environ["DB_PORT"],
     }
 }
+
+
+# Media
+# https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
+# https://docs.djangoproject.com/en/3.1/ref/settings/#media-url
+
+MEDIA_ROOT = APPS_DIR / "media"
+
+MEDIA_URL = "media/"

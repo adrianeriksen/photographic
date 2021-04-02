@@ -10,7 +10,7 @@
 <p><a href="{% url "photos:create" %}">Upload new photo</a></p>
 {% for photo in photos %}
     <article class="photo-{{ photo.id }}">
-        <p><img src="{{ photo.photo }}" width="400" alt=""></p>
+        <p><img src="{{ photo.photo.url }}" width="400" alt=""></p>
         <p><strong>{{ photo.author }}</strong> {{ photo.caption }}</p>
         <p>{{ photo.created_on }}</p>
         {% if not forloop.last %}<hr>{% endif %}

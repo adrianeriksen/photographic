@@ -1,13 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photographic</title>
-    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
 <p><a href="{% url "photos:create" %}">Upload new photo</a></p>
 {% for photo in photos %}
     <article class="photo-{{ photo.id }}">
@@ -21,5 +14,4 @@
         <p>Sorry, no photos are available.</p>
     </article>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

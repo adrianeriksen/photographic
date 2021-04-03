@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from .forms import PhotoForm
 from .models import Photo
 
 
@@ -15,16 +16,14 @@ def photo_list(request):
 
 def create_photo(request):
     if request.method == "POST":
-        photo_object = request.FILES["photo"]
-        caption = request.POST["caption"]
-        author = request.POST["author"]
+        form = PhotoForm(request.POST, request.FILES)
 
-        photo = Photo(photo=photo_object, caption=caption, author=author)
-        extension = photo.photo.name.split(".")[-1]
-        photo.photo.name = str(uuid4()) + "." + extension
-        photo.save()
+        if form.is_valid():
+            form.instance.photo.name = str(uuid4()) + ".jpg"
+            form.save()
 
-        if photo.id:
             return HttpResponseRedirect(reverse("photos:photo_list"))
+    else:
+        form = PhotoForm()
 
-    return render(request, "photos/create.html")
+    return render(request, "photos/create.html", {"form": form})

@@ -3,9 +3,14 @@ from uuid import uuid4
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.views import generic
 
 from .forms import PhotoForm
 from .models import Photo
+
+
+class DetailView(generic.DetailView):
+    model = Photo
 
 
 def photo_list(request):

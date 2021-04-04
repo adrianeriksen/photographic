@@ -2,7 +2,7 @@
 
 {% block content %}
 <p><a href="{% url "photos:create" %}">Upload new photo</a></p>
-{% for photo in photos %}
+{% for photo in photo_list %}
     <article class="photo-{{ photo.id }}">
         <p><img src="{{ photo.photo.url }}" width="300" alt=""></p>
         <p><a href="{% url "photos:detail" photo.id %}">More »</a></p>

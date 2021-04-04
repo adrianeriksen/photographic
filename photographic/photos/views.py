@@ -9,14 +9,15 @@ from .forms import PhotoForm
 from .models import Photo
 
 
-class DetailView(generic.DetailView):
+class ListView(generic.ListView):
     model = Photo
 
+    def get_queryset(self):
+        return self.model.objects.order_by("-created_on")[:6]
 
-def photo_list(request):
-    photos = Photo.objects.order_by("-created_on")[:9]
-    context = {"photos": photos}
-    return render(request, "photos/photo_list.html", context)
+
+class DetailView(generic.DetailView):
+    model = Photo
 
 
 def create_photo(request):

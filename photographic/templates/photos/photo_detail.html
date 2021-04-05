@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href="{% url "photos:create" %}">Upload new photo</a></p>
-<article class="photo-{{ photo.id }}">
-    <p><img src="{{ photo.photo.url }}" width="500" alt=""></p>
-    <p><strong>{{ photo.author }}</strong> {{ photo.caption }}</p>
-    <p>{{ photo.created_on }}</p>
+<article class="photo-{{ photo.id }} photo-detail">
+    <div>
+        <img src="{{ photo.photo.url }}" alt="">
+    </div>
+    <div>
+        <p><strong>{{ photo.author }}</strong> {{ photo.caption }}</p>
+        <p>{{ photo.created_on }}</p>
+    </div>
 </article>
-<p><a href="{% url "photos:photo_list" %}">« Back</a></p>
 {% endblock %}

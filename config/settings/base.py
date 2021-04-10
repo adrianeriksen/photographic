@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "photographic.photos",
+    "photographic.users",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+
+
+# Authentication
+# https://docs.djangoproject.com/en/3.1/ref/settings/#auth
+
+AUTH_USER_MODEL = "users.User"
 
 
 # Password validation

@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from .validators import AlphanumericUsernameValidator
 
 
 class User(AbstractUser):
@@ -10,13 +11,13 @@ class User(AbstractUser):
 
     Username and password are required. Other fields are optional.
     """
-    username_validator = UnicodeUsernameValidator()
+    username_validator = AlphanumericUsernameValidator()
 
     username = models.CharField(
         _('username'),
         max_length=30,
         unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_('Required. 30 characters or fewer. Letters and digits.'),
         validators=[username_validator],
         error_messages={
             'unique': _("A user with that username already exists."),
@@ -24,6 +25,10 @@ class User(AbstractUser):
     )
     first_name = None
     last_name = None
+
+    def clean(self):
+        super().clean()
+        setattr(self, self.USERNAME_FIELD, self.get_username().lower())
 
     def get_full_name(self):
         return self.username

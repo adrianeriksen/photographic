@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="box">
+        <h1>{{ user.username }}</h1>
+    </div>
+<section class="photo-container">
+{% for photo in photo_list %}
+    <article class="photo-{{ photo.id }}">
+        <a href="{% url "photos:detail" photo.id %}">
+            <img src="{{ photo.photo.url }}" alt="">
+        </a>
+    </article>
+{% endfor %}
+</section>
+{% for photo in photo_list %}
+{% empty %}
+    <article class="photo-empty">
+        <p>Sorry, no photos are available.</p>
+    </article>
+{% endfor %}
+{% endblock %}

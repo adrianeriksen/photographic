@@ -9,13 +9,6 @@ from .forms import PhotoForm
 from .models import Photo
 
 
-class ListView(generic.ListView):
-    model = Photo
-
-    def get_queryset(self):
-        return self.model.objects.order_by("-created_on")[:6]
-
-
 class DetailView(generic.DetailView):
     model = Photo
 
@@ -28,7 +21,7 @@ def create_photo(request):
             form.instance.photo.name = str(uuid4()) + ".jpg"
             form.save()
 
-            return HttpResponseRedirect(reverse("photos:photo_list"))
+            return HttpResponseRedirect(reverse("photos:detail", args=(form.instance.id,)))
     else:
         form = PhotoForm()
 

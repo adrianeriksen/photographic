@@ -3,6 +3,10 @@ from django.views import generic
 from .models import User
 
 
+class ListView(generic.ListView):
+    model = User
+
+
 class DetailView(generic.DetailView):
     model = User
     slug_field = "username"

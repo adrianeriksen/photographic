@@ -1,6 +1,6 @@
 import io
+import os
 
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 from PIL import Image
@@ -36,3 +36,6 @@ class TestCreateView(TestCase):
         photo = Photo.objects.filter(author_id=user.id)[0]
 
         self.assertRedirects(response, reverse("photos:detail", args=(photo.id,)))
+
+        # Clean up temporary image
+        os.remove(photo.photo.path)

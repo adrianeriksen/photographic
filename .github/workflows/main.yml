@@ -1,0 +1,48 @@
+name: Photographic Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: photographic_test
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: "3.9"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pipenv wheel
+          pipenv install --dev
+      
+      - name: Test
+        run: |
+          pipenv run python manage.py test
+        env:
+          SECRET_KEY: jcw0sewkei0ab1l2rh1gdu7anwv8cww6c35e65up
+          DB_NAME: photographic_test
+          DB_HOST: postgres
+          DB_PORT: 5432

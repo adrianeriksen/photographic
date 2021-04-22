@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     
     services:
-      database:
+      postgres:
         image: postgres
         env:
           POSTGRES_DB: photographic_test
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -43,5 +44,5 @@ jobs:
         env:
           SECRET_KEY: jcw0sewkei0ab1l2rh1gdu7anwv8cww6c35e65up
           DB_NAME: photographic_test
-          DB_HOST: localhost
+          DB_HOST: postgres
           DB_PORT: 5432

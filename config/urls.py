@@ -6,6 +6,7 @@ from django.urls import include, path
 from photographic.users.views import ListView as HomeView
 
 urlpatterns = [
+    path("accounts/", include("django.contrib.auth.urls")),
     path("admin/", admin.site.urls),
     path("p/", include("photographic.photos.urls")),
     path("u/", include("photographic.users.urls")),

@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -9,7 +10,7 @@ from .forms import PhotoForm
 from .models import Photo
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Photo
 
 

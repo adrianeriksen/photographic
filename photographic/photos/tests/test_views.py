@@ -1,12 +1,43 @@
 import io
 import os
 
-from django.test import TestCase
+from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from PIL import Image
 
 from photographic.users.models import User
 from photographic.photos.models import Photo
+from photographic.photos.views import DetailView
+
+
+class TestDetailView(TestCase):
+    def setUp(self):
+        self.rf = RequestFactory()
+
+    def test_authentication(self):
+        user = User.objects.create_user("bob")
+        photo = Photo.objects.create(author_id=user.id, photo="e120f48d.jpeg", caption="Example photo")
+
+        request = self.rf.get("/p/1")
+        request.user = user
+
+        response = DetailView.as_view()(request, pk=photo.id)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_no_authentication(self):
+        user = User.objects.create_user("bob")
+        photo = Photo.objects.create(author_id=user.id, photo="e120f48d.jpeg", caption="Example photo")
+
+        request = self.rf.get("/p/1")
+        request.user = AnonymousUser()
+
+        response = DetailView.as_view()(request, pk=photo.id)
+        login_url = settings.LOGIN_URL + "?next=/p/1"
+
+        self.assertRedirects(response, login_url, fetch_redirect_response=False)
 
 
 class TestCreateView(TestCase):
@@ -35,7 +66,7 @@ class TestCreateView(TestCase):
         response = self.client.post(reverse("photos:create"), data)
         photo = Photo.objects.filter(author_id=user.id)[0]
 
-        self.assertRedirects(response, reverse("photos:detail", args=(photo.id,)))
+        self.assertRedirects(response, reverse("photos:detail", args=(photo.id,)), fetch_redirect_response=False)
 
         # Clean up temporary image
         os.remove(photo.photo.path)

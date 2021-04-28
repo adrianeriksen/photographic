@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from photographic.users.models import User
 from photographic.photos.models import Photo
-from photographic.photos.views import DetailView
+from photographic.photos.views import DetailView, create_photo
 from .utils import generate_example_image
 
 
@@ -44,8 +44,27 @@ class TestDetailView(TestCase):
 
 
 class TestCreateView(TestCase):
-    def test_create_new_photo_page(self):
-        response = self.client.get(reverse("photos:create"))
+    def setUp(self):
+        self.rf = RequestFactory()
+
+    def test_no_authentication(self):
+        path = reverse("photos:create")
+        request = self.rf.get(path)
+        request.user = AnonymousUser()
+
+        response = create_photo(request)
+        login_url = settings.LOGIN_URL + "?next=" + path
+
+        self.assertRedirects(response, login_url, fetch_redirect_response=False)
+
+    def test_form_shows_when_authenticated(self):
+        user = User.objects.create_user("bob")
+
+        request = self.rf.get("/example/path")
+        request.user = user
+
+        response = create_photo(request)
+
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Photo:")
         self.assertContains(response, "Caption:")
@@ -60,7 +79,10 @@ class TestCreateView(TestCase):
             "author": user.id,
         }
 
-        response = self.client.post(reverse("photos:create"), data)
+        request = self.rf.post("/example/path", data)
+        request.user = user
+
+        response = create_photo(request)
         photo = Photo.objects.filter(author_id=user.id)[0]
 
         self.assertRedirects(

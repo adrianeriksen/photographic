@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -14,6 +15,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Photo
 
 
+@login_required
 def create_photo(request):
     if request.method == "POST":
         form = PhotoForm(request.POST, request.FILES)

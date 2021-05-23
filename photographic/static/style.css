@@ -13,6 +13,14 @@ label {
     display: block;
 }
 
+table {
+    width: 100%;
+}
+
+table th {
+    text-align: left;
+}
+
 .header {
     background-color: white;
     border-bottom: 1px solid #ccc;
@@ -62,4 +70,18 @@ label {
 
 .box h1 {
     margin: 0;
+}
+
+.support-pages {
+    font-size: 90%;
+}
+
+.support-pages ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.support-pages ul li {
+    display: inline-block;
+    margin-right: 16px;
 }

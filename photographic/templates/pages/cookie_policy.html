@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Cookie Policy</h1>
+
+<p>
+    Photographic only uses strictly necessary first-party cookies. These are set and controlled by Photographic, not
+    by any external entity.
+</p>
+
+<h2>List over cookies</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td>sessionid</td>
+        <td>Authentication of users. Created after successful login.</td>
+    </tr>
+    <tr>
+        <td>csrftoken</td>
+        <td>Security functionality preventing unwanted requests on behalf of authenticated users.</td>
+    </tr>
+</table>
+{% endblock %}

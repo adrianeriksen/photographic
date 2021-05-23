@@ -11,6 +11,8 @@ class UserTest(TestCase):
         username = "bob"
 
         user = user_model.objects.create_user(username, "bob@example.com", "password")
-        photo = Photo.objects.create(author_id=user.id, photo="e120f48d.jpeg", caption="Example photo")
+        photo = Photo.objects.create(
+            photographer_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
+        )
 
         self.assertEqual(repr(photo), "<Photo: bob e120f48d.jpeg>")

@@ -22,9 +22,12 @@ def create_photo(request):
 
         if form.is_valid():
             form.instance.photo.name = str(uuid4()) + ".jpg"
+            form.instance.photographer = request.user
             form.save()
 
-            return HttpResponseRedirect(reverse("photos:detail", args=(form.instance.id,)))
+            return HttpResponseRedirect(
+                reverse("photos:detail", args=(form.instance.id,))
+            )
     else:
         form = PhotoForm()
 

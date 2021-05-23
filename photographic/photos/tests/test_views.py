@@ -18,7 +18,7 @@ class TestDetailView(TestCase):
     def test_authentication(self):
         user = User.objects.create_user("bob")
         photo = Photo.objects.create(
-            author_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
+            photographer_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
         )
 
         request = self.rf.get("/p/1")
@@ -31,7 +31,7 @@ class TestDetailView(TestCase):
     def test_no_authentication(self):
         user = User.objects.create_user("bob")
         photo = Photo.objects.create(
-            author_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
+            photographer_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
         )
 
         request = self.rf.get("/p/1")
@@ -68,7 +68,7 @@ class TestCreateView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Photo:")
         self.assertContains(response, "Caption:")
-        self.assertContains(response, "Author:")
+        self.assertNotContains(response, "Author:")
 
     def test_submit_new_photo(self):
         user = User.objects.create_user("jonas")
@@ -76,14 +76,13 @@ class TestCreateView(TestCase):
         data = {
             "photo": generate_example_image(),
             "caption": "Example image",
-            "author": user.id,
         }
 
         request = self.rf.post("/example/path", data)
         request.user = user
 
         response = create_photo(request)
-        photo = Photo.objects.filter(author_id=user.id)[0]
+        photo = Photo.objects.filter(photographer_id=user.id)[0]
 
         self.assertRedirects(
             response,

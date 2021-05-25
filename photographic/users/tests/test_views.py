@@ -1,9 +1,11 @@
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.views import LoginView
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 from photographic.users.models import User
+from photographic.users.views import DetailView
 
 
 class TestIndexView(TestCase):
@@ -13,6 +15,34 @@ class TestIndexView(TestCase):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<a href="/u/jonas/">jonas</a>')
+
+
+class TestDetailView(TestCase):
+    def setUp(self):
+        self.rf = RequestFactory()
+
+    def test_authentication(self):
+        username = "jonas"
+        user = User.objects.create_user("jonas")
+
+        request = self.rf.get("/example/path")
+        request.user = user
+
+        response = DetailView.as_view()(request, slug=user.username)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f"<h1>{username}</h1>")
+
+    def test_no_authentication(self):
+        user = User.objects.create_user("jonas")
+
+        request = self.rf.get("/example/path")
+        request.user = AnonymousUser()
+
+        response = DetailView.as_view()(request, slug=user.username)
+        login_url = settings.LOGIN_URL + "?next=/example/path"
+
+        self.assertRedirects(response, login_url, fetch_redirect_response=False)
 
 
 class TestLoginView(TestCase):

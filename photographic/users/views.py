@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 
 from .models import User
@@ -7,7 +8,7 @@ class ListView(generic.ListView):
     model = User
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     slug_field = "username"
 

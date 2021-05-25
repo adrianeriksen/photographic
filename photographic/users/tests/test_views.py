@@ -5,16 +5,27 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 from photographic.users.models import User
-from photographic.users.views import DetailView
+from photographic.users.views import DetailView, ListView
 
 
 class TestIndexView(TestCase):
+    def setUp(self):
+        self.rf = RequestFactory()
+
     def test_user_list_view(self):
+        username = "jonas"
         User.objects.create_user("jonas")
 
-        response = self.client.get(reverse("home"))
+        request = self.rf.get("/example/path")
+        request.user = AnonymousUser()
+
+        response = ListView.as_view()(request)
+
+        profile_path = reverse("users:detail", args=(username,))
+        expected_link = f'<a href="{profile_path}">{username}</a>'
+
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<a href="/u/jonas/">jonas</a>')
+        self.assertContains(response, expected_link)
 
 
 class TestDetailView(TestCase):
@@ -28,7 +39,7 @@ class TestDetailView(TestCase):
         request = self.rf.get("/example/path")
         request.user = user
 
-        response = DetailView.as_view()(request, slug=user.username)
+        response = DetailView.as_view()(request, slug=username)
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, f"<h1>{username}</h1>")

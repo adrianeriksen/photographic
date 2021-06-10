@@ -10,26 +10,30 @@
 </head>
 <body>
 <div class="header">
-    <ul>
-        <li><a href="{% url "home" %}">Photographic</a></li>
-        {% if user.is_authenticated %}
+    <div class="container">
+        <ul>
+            <li><a href="{% url "home" %}">Photographic</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url "photos:create" %}">Upload new photo</a></li>
             <li><a href="{% url "logout" %}">Logout</a></li>
-        {% else %}
+            {% else %}
             <li><a href="{% url "login" %}">Login</a></li>
-        {% endif %}
-    </ul>
-</div>
-{% block content %}
-{% endblock %}
-<div>
-    <hr>
-    <nav class="support-pages">
-        <ul>
-            <li><a href="{% url "cookie-policy" %}">Cookie policy</a></li>
-            <li><a href="{% url "privacy-policy" %}">Privacy policy</a></li>
+            {% endif %}
         </ul>
-    </nav>
+    </div>
+</div>
+<div class="container">
+    {% block content %}
+    {% endblock %}
+    <div>
+        <hr>
+        <nav class="support-pages">
+            <ul>
+                <li><a href="{% url "cookie-policy" %}">Cookie policy</a></li>
+                <li><a href="{% url "privacy-policy" %}">Privacy policy</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 </body>
 </html>

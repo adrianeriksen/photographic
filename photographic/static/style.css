@@ -1,12 +1,11 @@
 :root {
-    font-size: 120%;
+    font-size: 110%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 body {
     background-color: rgba(249, 250, 251);
-    max-width: 720px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 label {
@@ -19,6 +18,11 @@ table {
 
 table th {
     text-align: left;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 .header {

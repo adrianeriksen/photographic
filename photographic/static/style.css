@@ -90,9 +90,19 @@ a:hover {
     margin: 2em 0;
 }
 
+.photographer-information h1 {
+    font-weight: normal;
+}
+
+.photographer-information h1,
+.photographer-information p {
+    margin: 1.4rem 0;
+}
+
+
 div.avatar {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     background-color: black;
     border-radius: 50%;
     display: inline-block;

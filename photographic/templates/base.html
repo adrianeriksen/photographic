@@ -25,15 +25,13 @@
 <div class="container">
     {% block content %}
     {% endblock %}
-    <div>
-        <hr>
-        <nav class="support-pages">
-            <ul>
-                <li><a href="{% url "cookie-policy" %}">Cookie policy</a></li>
-                <li><a href="{% url "privacy-policy" %}">Privacy policy</a></li>
-            </ul>
-        </nav>
-    </div>
+    <nav class="support-pages">
+        <ul>
+            <li><a href="{% url "cookie-policy" %}">Cookie policy</a></li>
+            <li><a href="{% url "privacy-policy" %}">Privacy policy</a></li>
+        </ul>
+        <p>© Photographic by Aer Development</p>
+    </nav>
 </div>
 </body>
 </html>

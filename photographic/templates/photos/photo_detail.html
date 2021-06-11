@@ -6,8 +6,8 @@
         <img src="{{ photo.photo.url }}" alt="">
     </div>
     <div>
-        <p><strong>{{ photo.author }}</strong> {{ photo.caption }}</p>
-        <p>{{ photo.created_on }}</p>
+        <p><strong>{{ photo.photographer.username }}</strong> {{ photo.caption }}</p>
+        <p>{{ photo.created_on|date:"l, M n" }}</p>
     </div>
 </article>
 {% endblock %}

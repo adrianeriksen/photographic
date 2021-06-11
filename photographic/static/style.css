@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgba(249, 250, 251);
+    background-color: #f9fafc;
     margin: 0;
 }
 
@@ -23,6 +23,15 @@ table th {
 .container {
     max-width: 720px;
     margin: 0 auto;
+}
+
+a {
+    color: #0074bf;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0093f2;
 }
 
 .header {
@@ -76,8 +85,23 @@ table th {
     margin: 0;
 }
 
+.photographer-information {
+    text-align: center;
+    margin: 2em 0;
+}
+
+div.avatar {
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .support-pages {
     font-size: 90%;
+    text-align: center;
+    margin: 2em 0;
 }
 
 .support-pages ul {

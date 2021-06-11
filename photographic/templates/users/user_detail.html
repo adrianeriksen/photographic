@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="box">
+    <div class="photographer-information">
+        <div class="avatar"></div>
         <h1>{{ user.username }}</h1>
+        <p>Chief Executive Officer @ Photographic. Security and privacy expert.</p>
     </div>
 <section class="photo-container">
 {% for photo in photo_list %}

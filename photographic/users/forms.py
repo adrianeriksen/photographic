@@ -10,3 +10,4 @@ class UserChangeForm(auth_forms.UserChangeForm):
 class UserCreationForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = get_user_model()
+        fields = ("username", "email")

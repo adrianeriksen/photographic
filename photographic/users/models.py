@@ -25,6 +25,14 @@ class User(AbstractUser):
     )
     first_name = None
     last_name = None
+    email = models.EmailField(
+        _('email address'),
+        unique=True,
+        help_text="Required.",
+        error_messages={
+            'unique': _("A user with that email address already exists."),
+        },
+    )
 
     def clean(self):
         super().clean()

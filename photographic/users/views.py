@@ -16,3 +16,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
         context = super().get_context_data()
         context["photo_list"] = context["user"].photo_set.all()
         return context
+
+
+class SignUpView(generic.TemplateView):
+    template_name = "users/signup.html"

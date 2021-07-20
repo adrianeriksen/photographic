@@ -25,6 +25,11 @@ table th {
     margin: 0 auto;
 }
 
+.wide-container {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
 a {
     color: #0074bf;
     text-decoration: none;
@@ -121,5 +126,5 @@ div.avatar {
 
 .support-pages ul li {
     display: inline-block;
-    margin-right: 16px;
+    margin: 0 0.6em;
 }

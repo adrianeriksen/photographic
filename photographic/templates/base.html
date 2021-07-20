@@ -10,13 +10,14 @@
 </head>
 <body>
 <div class="header">
-    <div class="container">
+    <div class="wide-container">
         <ul>
             <li><a href="{% url "home" %}">Photographic</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url "photos:create" %}">Upload new photo</a></li>
             <li><a href="{% url "logout" %}">Logout</a></li>
             {% else %}
+            <li><a href="{% url "users:signup" %}">Sign up</a></li>
             <li><a href="{% url "login" %}">Login</a></li>
             {% endif %}
         </ul>

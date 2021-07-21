@@ -3,7 +3,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .forms import UserCreationForm
-from .models import User
+from .models import User, Profile
 
 
 class ListView(generic.ListView):
@@ -17,6 +17,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context["photo_list"] = context["user"].photo_set.all()
+        context["profile"] = context["user"].profile
         return context
 
 
@@ -28,3 +29,14 @@ class SignUpView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = Profile
+    fields = ("bio",)
+    success_url = reverse_lazy("users:profile")
+
+    def get_object(self, queryset=None):
+        user_id = self.request.user.id
+        profile, _ = Profile.objects.get_or_create(user_id=user_id)
+        return profile

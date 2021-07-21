@@ -43,3 +43,8 @@ class User(AbstractUser):
 
     def get_short_name(self):
         return self.username
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=120, blank=True)

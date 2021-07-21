@@ -4,7 +4,9 @@
     <div class="photographer-information">
         <div class="avatar"></div>
         <h1>{{ user.username }}</h1>
-        <p>Chief Executive Officer @ Photographic. Security and privacy expert.</p>
+        {% if profile.bio %}
+            <p>{{ profile.bio }}</p>
+        {% endif %}
     </div>
 <section class="photo-container">
 {% for photo in photo_list %}

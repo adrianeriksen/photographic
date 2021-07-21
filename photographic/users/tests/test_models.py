@@ -33,7 +33,7 @@ class UserModelTests(TestCase):
     def test_usernames_tranformed_to_lowercase(self):
         username = "ADRIAN"
 
-        u = User(username=username, password="password")
+        u = User(username=username, password="password", email="adrian@example.com")
         u.full_clean()
 
         self.assertEqual(u.username, username.lower())

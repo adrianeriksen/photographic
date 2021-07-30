@@ -9,9 +9,9 @@ from .base import *
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["photographic.aer.dev"]
 
 
 # Database
@@ -33,7 +33,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-url
 
-MEDIA_ROOT = APPS_DIR / "media"
+MEDIA_ROOT = os.environ["MEDIA_DIR"]
 
 MEDIA_URL = "media/"
 
@@ -42,5 +42,7 @@ MEDIA_URL = "media/"
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_DIRS = [APPS_DIR / "static"]
+
+STATIC_ROOT = os.environ["STATIC_DIR"]
 
 STATIC_URL = "/static/"

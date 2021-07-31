@@ -11,6 +11,11 @@ from .forms import PhotoForm
 from .models import Photo
 
 
+class ListView(generic.ListView):
+    def get_queryset(self):
+        return Photo.objects.order_by("-created_on")[:6]
+
+
 class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Photo
 

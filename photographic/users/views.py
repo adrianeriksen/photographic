@@ -6,17 +6,13 @@ from .forms import UserCreationForm
 from .models import User, Profile
 
 
-class ListView(generic.ListView):
-    model = User
-
-
 class DetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     slug_field = "username"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context["photo_list"] = context["user"].photo_set.all()
+        context["photo_list"] = context["user"].photo_set.order_by("-created_on")
         context["profile"] = context["user"].profile
         return context
 

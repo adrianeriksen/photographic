@@ -2,13 +2,7 @@
 
 {% block content %}
 <section class="photo-container">
-{% for photo in photo_list %}
-    <article class="photo-{{ photo.id }}">
-        <a href="{% url "photos:detail" photo.id %}">
-            <img src="{{ photo.photo.url }}" alt="">
-        </a>
-    </article>
-{% endfor %}
+    {% include "photos/photo_list_snippet.html" %}
 </section>
 {% for photo in photo_list %}
 {% empty %}

@@ -2,30 +2,9 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.views import LoginView
 from django.test import RequestFactory, TestCase
-from django.urls import reverse
 
 from photographic.users.models import User
-from photographic.users.views import DetailView, ListView
-
-
-class TestIndexView(TestCase):
-    def setUp(self):
-        self.rf = RequestFactory()
-
-    def test_user_list_view(self):
-        username = "jonas"
-        User.objects.create_user("jonas")
-
-        request = self.rf.get("/example/path")
-        request.user = AnonymousUser()
-
-        response = ListView.as_view()(request)
-
-        profile_path = reverse("users:detail", args=(username,))
-        expected_link = f'<a href="{profile_path}">{username}</a>'
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, expected_link)
+from photographic.users.views import DetailView
 
 
 class TestDetailView(TestCase):

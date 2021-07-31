@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from photographic.pages.views import CookiePolicy, PrivacyPolicy
-from photographic.users.views import ListView as HomeView
+from photographic.photos.views import ListView as HomeView
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),

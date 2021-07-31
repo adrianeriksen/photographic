@@ -10,6 +10,7 @@ body {
 
 label {
     display: block;
+    margin-bottom: 0.4rem;
 }
 
 table {
@@ -18,6 +19,38 @@ table {
 
 table th {
     text-align: left;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 70%;
+    border: 1px solid #d1d1d1;
+    font-size: 105%;
+    padding: 0.2rem 0.4rem;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #0074bf;
+    outline: none;
+}
+
+button {
+    background-color: #0074bf;
+    color: #ffffff;
+    border: none;
+    font-family: inherit;
+    font-size: 105%;
+    padding: 0.5rem 1.4rem;
+    border-radius: 4px;
+}
+
+button:hover,
+button:focus {
+    background-color: #0093f2;
+    outline: none;
 }
 
 .container {

@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="{% url "photos:create" %}" method="post" enctype="multipart/form-data">
-    <h1>Create new photo post</h1>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <p>
-        <button type="submit">Create photo</button>
-    </p>
-</form>
+<div class="box">
+    <form action="{% url "photos:create" %}" method="post" enctype="multipart/form-data">
+        <h1>Create new photo post</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <button type="submit">Create photo</button>
+        </p>
+    </form>
+</div>
 {% endblock %}

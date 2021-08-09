@@ -29,6 +29,12 @@ DATABASES = {
 }
 
 
+# Cloud storage configuration
+
+AWS_S3_REGION_NAME = os.environ["AWS_S3_REGION_NAME"]
+AWS_S3_ENDPOINT_URL = os.environ["AWS_S3_ENDPOINT_URL"]
+
+
 # Media
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-url

@@ -33,16 +33,16 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-url
 
-MEDIA_ROOT = os.environ["MEDIA_DIR"]
+DEFAULT_FILE_STORAGE = "config.storages.MediaStorage"
 
-MEDIA_URL = "media/"
+MEDIA_URL = os.environ["MEDIA_STORAGE_URL"]
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATICFILES_STORAGE = "config.storages.StaticStorage"
+
 STATICFILES_DIRS = [APPS_DIR / "static"]
 
-STATIC_ROOT = os.environ["STATIC_DIR"]
-
-STATIC_URL = "/static/"
+STATIC_URL = os.environ["STATIC_STORAGE_URL"]

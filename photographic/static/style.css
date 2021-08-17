@@ -146,6 +146,13 @@ div.avatar {
     display: inline-block;
 }
 
+.profile-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .support-pages {
     font-size: 90%;
     text-align: center;

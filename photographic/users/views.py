@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
@@ -29,10 +31,14 @@ class SignUpView(generic.FormView):
 
 class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
     model = Profile
-    fields = ("bio",)
+    fields = ("bio", "photo")
     success_url = reverse_lazy("users:profile")
 
     def get_object(self, queryset=None):
         user_id = self.request.user.id
         profile, _ = Profile.objects.get_or_create(user_id=user_id)
         return profile
+
+    def form_valid(self, form):
+        form.instance.photo.name = "profile-photos/" + str(uuid4()) + ".jpg"
+        return super().form_valid(form)

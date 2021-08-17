@@ -2,7 +2,11 @@
 
 {% block content %}
     <div class="photographer-information">
-        <div class="avatar"></div>
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" alt="" class="profile-photo">
+        {% else %}
+            <div class="avatar"></div>
+        {% endif %}
         <h1>{{ user.username }}</h1>
         {% if profile.bio %}
             <p>{{ profile.bio }}</p>

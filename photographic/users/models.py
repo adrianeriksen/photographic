@@ -48,3 +48,4 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=120, blank=True)
+    photo = models.ImageField(blank=True, upload_to="profile-photos")

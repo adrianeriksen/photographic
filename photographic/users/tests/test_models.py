@@ -1,7 +1,17 @@
 from django.db.utils import DataError
 from django.test import TestCase
 
-from photographic.users.models import User
+from photographic.users.models import Profile, User
+
+
+class ProfileModelTests(TestCase):
+    def test_profile_is_created_with_user(self):
+        username = "alice"
+        user = User.objects.create_user(username)
+
+        profile_count = Profile.objects.filter(user_id=user.id).count()
+
+        self.assertEqual(profile_count, 1, "Number of profiles other than 1")
 
 
 class UserModelTests(TestCase):

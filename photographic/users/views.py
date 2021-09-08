@@ -35,9 +35,7 @@ class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
     success_url = reverse_lazy("users:profile")
 
     def get_object(self, queryset=None):
-        user_id = self.request.user.id
-        profile, _ = Profile.objects.get_or_create(user_id=user_id)
-        return profile
+        return Profile.objects.get(user=self.request.user.id)
 
     def form_valid(self, form):
         if "photo" in form.changed_data:

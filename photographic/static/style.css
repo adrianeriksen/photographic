@@ -89,10 +89,18 @@ a:hover {
     margin-left: 1.2rem;
 }
 
+
+
 .photo-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+}
+
+@media screen and (orientation: landscape) {
+    .photo-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 .photo-container > article img {

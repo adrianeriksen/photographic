@@ -12,6 +12,17 @@
             </a>
             {{ photo.caption }}
         </p>
+        {% for comment in photo.comment_set.all %}
+        <p>
+            <a href="{% url "users:detail" comment.author.username %}">
+                <strong>{{ comment.author.username }}</strong>
+            </a>
+            {{ comment.content }}
+        </p>
+        {% endfor %}
+        <p>
+            <a href="{% url "photos:create_comment" photo.id %}">Share a comment</a>
+        </p>
         <p>{{ photo.created_on|date:"l, M j" }}</p>
     </div>
 </article>

@@ -12,4 +12,20 @@ class Photo(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.photographer.username} {self.photo}"
+        return str(self.photo)
+
+
+class Comment(models.Model):
+    content = models.TextField()
+    photo = models.ForeignKey(
+        Photo,
+        on_delete=models.CASCADE,
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.created_on} {self.author.username} on {self.photo.photo}"

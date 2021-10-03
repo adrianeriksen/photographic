@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="box">
+    <h1>Share a comment</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p>
+            <button type="submit">Comment</button>
+        </p>
+        <p>
+            <a href="{% url "photos:detail" photo_id %}">Back to photo</a>
+        </p>
+    </form>
+</div>
+{% endblock %}

@@ -19,6 +19,32 @@ class ListView(generic.ListView):
 class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Photo
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        photo = context["photo"]
+        comments = [
+            self._generate_comment(photo.caption, photo.photographer, photo.created_on)
+        ]
+
+        for comment in photo.comment_set.all():
+            comments.append(
+                self._generate_comment(comment.content, comment.author, comment.created_on)
+            )
+
+        context["comments"] = comments
+        return context
+
+    def _generate_comment(self, content, author, created_on):
+        return {
+            "author": {
+                "username": author.username,
+                "photo_url": author.profile.photo.url if author.profile.photo else ""
+            },
+            "content": content,
+            "created_on": created_on
+        }
+
 
 class CreateCommentView(LoginRequiredMixin, generic.CreateView):
     model = Comment

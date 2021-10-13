@@ -1,0 +1,10 @@
+<li class="comment">
+    <img src="{{ comment.author.photo_url }}" alt="" class="comment-profile-photo">
+    <p class="comment-content">
+        <a href="{% url "users:detail" comment.author.username %}">
+            <strong>{{ comment.author.username }}</strong>
+        </a>
+        {{ photo.content }}
+    </p>
+    <p class="comment-date">{{ comment.created_on|date:"Y-m-d" }}</p>
+</li>

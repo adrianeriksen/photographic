@@ -1,5 +1,5 @@
 :root {
-    font-size: 110%;
+    font-size: 105%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -174,4 +174,35 @@ div.avatar {
 .support-pages ul li {
     display: inline-block;
     margin: 0 0.6em;
+}
+
+.comment-profile-photo {
+    height: 45px;
+    width: 45px !important;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.comments {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments > .comment > .comment-profile-photo {
+    float: left;
+}
+
+.comments > .comment > .comment-content {
+    margin-left: 60px;
+}
+
+.comments > .comment > .comment-date {
+    margin-left: 60px;
+    color: #3d3d3d;
+    font-size: 80%;
+}
+
+.photo-date {
+    color: #3d3d3d;
+    font-size: 80%;
 }

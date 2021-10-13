@@ -6,24 +6,16 @@
         <img src="{{ photo.photo.url }}" alt="">
     </div>
     <div>
-        <p>
-            <a href="{% url "users:detail" user.username %}">
-                <strong>{{ photo.photographer.username }}</strong>
-            </a>
-            {{ photo.caption }}
-        </p>
-        {% for comment in photo.comment_set.all %}
-        <p>
-            <a href="{% url "users:detail" comment.author.username %}">
-                <strong>{{ comment.author.username }}</strong>
-            </a>
-            {{ comment.content }}
-        </p>
-        {% endfor %}
+        <ul class="comments">
+            {% for comment in comments %}
+            {% include "photos/comment.html" with comment=comment only %}
+            {% endfor %}
+        </ul>
+        <hr>
         <p>
             <a href="{% url "photos:create_comment" photo.id %}">Share a comment</a>
         </p>
-        <p>{{ photo.created_on|date:"l, M j" }}</p>
+        <p class="photo-date">{{ photo.created_on|date:"Y-m-d" }}</p>
     </div>
 </article>
 {% endblock %}

@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -13,7 +14,11 @@ from .models import Comment, Photo
 
 class ListView(generic.ListView):
     def get_queryset(self):
-        return Photo.objects.order_by("-created_on")[:6]
+        if not self.request.user.is_authenticated:
+            return Photo.objects.order_by("-created_on")[:6]
+
+        following = self.request.user.following.all()
+        return Photo.objects.filter(photographer__in=following).order_by("-created_on")[:6]
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):

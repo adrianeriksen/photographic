@@ -34,6 +34,8 @@ class User(AbstractUser):
         },
     )
 
+    # from_user_id is followed user
+    # to_user_id is follower
     followers = models.ManyToManyField(
         "self",
         related_name="following",

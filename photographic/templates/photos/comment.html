@@ -4,7 +4,7 @@
         <a href="{% url "users:detail" comment.author.username %}">
             <strong>{{ comment.author.username }}</strong>
         </a>
-        {{ photo.content }}
+        {{ comment.content }}
     </p>
     <p class="comment-date">{{ comment.created_on|date:"Y-m-d" }}</p>
 </li>

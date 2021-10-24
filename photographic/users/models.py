@@ -34,6 +34,12 @@ class User(AbstractUser):
         },
     )
 
+    followers = models.ManyToManyField(
+        "self",
+        related_name="following",
+        symmetrical=False
+    )
+
     def clean(self):
         super().clean()
         setattr(self, self.USERNAME_FIELD, self.get_username().lower())

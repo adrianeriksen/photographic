@@ -47,3 +47,40 @@ class UserModelTests(TestCase):
         u.full_clean()
 
         self.assertEqual(u.username, username.lower())
+
+
+class UserFollowersTest(TestCase):
+    def test_follow_is_asymmetric(self):
+        alice = User.objects.create_user("alice", email="alice@example.com")
+        bob = User.objects.create_user("bob", email="bob@example.com")
+
+        alice.followers.add(bob)
+
+        self.assertEqual(alice.followers.count(), 1, "Alice should have one follower.")
+        self.assertEqual(bob.followers.count(), 0, "Bob should have none followers.")
+
+        self.assertEqual(alice.following.count(), 0, "Alice should follow no users.")
+        self.assertEqual(bob.following.count(), 1, "Bob should follow one user.")
+
+    def test_unfollow_is_asymmetric(self):
+        alice = User.objects.create_user("alice", email="alice@example.com")
+        bob = User.objects.create_user("bob", email="bob@example.com")
+
+        alice.followers.add(bob)
+        bob.followers.add(alice)
+
+        alice.followers.remove(bob)
+
+        self.assertEqual(alice.followers.count(), 0, "Alice should have none followers.")
+        self.assertEqual(bob.followers.count(), 1, "Bob should still have one follower.")
+
+    def test_follow_should_not_be_duplicated(self):
+        alice = User.objects.create_user("alice", email="alice@example.com")
+        bob = User.objects.create_user("bob", email="bob@example.com")
+
+        alice.followers.add(bob)
+        alice.followers.add(bob)
+
+        self.assertEqual(alice.followers.count(), 1, "Alice should not have duplicate followers.")
+
+

@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="layout-wrapper">
+    <div class="menu">
+        <ul>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Password</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <form method="post" enctype="multipart/form-data">
+            <h1>Update profile</h1>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Update profile</button>
+        </form>
+    </div>
+</div>
 <div class="box">
-    <form method="post" enctype="multipart/form-data">
-        <h1>Update profile</h1>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Update profile</button>
-    </form>
+
+
 </div>
 {% endblock %}

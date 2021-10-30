@@ -1,12 +1,10 @@
-from uuid import uuid4
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.urls import reverse, reverse_lazy
 
 from .forms import UserCreationForm
-from .models import User, Profile
+from .models import User
 
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
@@ -40,18 +38,4 @@ class SignUpView(generic.FormView):
 
     def form_valid(self, form):
         form.save()
-        return super().form_valid(form)
-
-
-class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
-    model = Profile
-    fields = ("bio", "photo")
-    success_url = reverse_lazy("users:profile")
-
-    def get_object(self, queryset=None):
-        return Profile.objects.get(user=self.request.user.id)
-
-    def form_valid(self, form):
-        if "photo" in form.changed_data:
-            form.instance.photo.name = "profile-photos/" + str(uuid4()) + ".jpg"
         return super().form_valid(form)

@@ -15,6 +15,7 @@ body {
 label {
     display: block;
     margin-bottom: 0.4rem;
+    font-weight: bold;
 }
 
 table {
@@ -26,6 +27,7 @@ table th {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
 textarea {
     width: 70%;
@@ -55,6 +57,24 @@ button:hover,
 button:focus {
     background-color: #0093f2;
     outline: none;
+}
+
+form ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 90%;
+}
+
+form ul li {
+    color: #3d3d3d;
+    margin: 0.3rem 0;
+}
+
+form .helptext {
+    font-size: 90%;
+    color: #3d3d3d;
+    display: block;
+    margin: 0.3rem 0;
 }
 
 .container {

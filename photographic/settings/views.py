@@ -1,7 +1,9 @@
 from uuid import uuid4
 
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -10,6 +12,12 @@ from photographic.users.models import Profile
 
 class UpdatePasswordView(LoginRequiredMixin, PasswordChangeView):
     template_name = "settings/password_form.html"
+    success_url = reverse_lazy("login")
+
+    def form_valid(self, form):
+        form.save()
+        logout(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):

@@ -1,8 +1,12 @@
+from io import BytesIO
 from uuid import uuid4
+
+from PIL import Image
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files import File
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -79,7 +83,22 @@ def create_photo(request):
         form = PhotoForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.instance.photo.name = str(uuid4()) + ".jpg"
+            im = Image.open(form.instance.photo)
+
+            image_height = im.height
+            image_width = im.width
+
+            shortest_side = min(image_width, image_height)
+
+            im = im.convert("RGB")
+            im = im.crop((0, 0, shortest_side, shortest_side))
+
+            im_io = BytesIO()
+
+            im.save(im_io, "JPEG", quality=100)
+
+            form.instance.photo = File(im_io, str(uuid4()) + ".jpg")
+
             form.instance.photographer = request.user
             form.save()
 

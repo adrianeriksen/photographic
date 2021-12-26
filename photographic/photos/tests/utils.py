@@ -1,13 +1,14 @@
-import io
-
+from io import BytesIO
 from PIL import Image
 
 
-def generate_example_image():
-    file = io.BytesIO()
-    image = Image.new("RGB", size=(200, 200), color=(12, 75, 51))
-    image.save(file, "jpeg")
-    file.name = "example.jpeg"
-    file.seek(0)
+def generate_example_image(size=(200, 200)):
+    _bytes = BytesIO()
 
-    return file
+    im = Image.new("RGB", size=size, color=(12, 75, 51))
+    im.save(_bytes, "jpeg")
+
+    _bytes.name = "example.jpeg"
+    _bytes.seek(0)
+
+    return _bytes

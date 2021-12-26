@@ -1,6 +1,8 @@
 from io import BytesIO
 from PIL import Image
 
+from django.core.files import File
+
 
 def generate_example_image(size=(200, 200)):
     _bytes = BytesIO()
@@ -12,3 +14,8 @@ def generate_example_image(size=(200, 200)):
     _bytes.seek(0)
 
     return _bytes
+
+
+def generate_example_image_file(size=(200, 200)):
+    image = generate_example_image(size)
+    return File(image)

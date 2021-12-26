@@ -1,8 +1,7 @@
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 from django.urls import reverse, reverse_lazy
 
 from photographic.users.models import Profile, User
-from photographic.settings.views import UpdateProfileView
 
 
 class TestUpdatePasswordView(TestCase):
@@ -24,9 +23,6 @@ class TestUpdatePasswordView(TestCase):
 
 
 class TestUpdateProfileView(TestCase):
-    def setUp(self):
-        self.rf = RequestFactory()
-
     def test_photo_keeps_name_on_update(self):
         photo_file_name = "1b4a9aec.jpeg"
         user = User.objects.create_user("jonas")
@@ -35,10 +31,8 @@ class TestUpdateProfileView(TestCase):
         profile.photo = photo_file_name
         profile.save()
 
-        request = self.rf.post("/example/path", {})
-        request.user = user
-
-        response = UpdateProfileView.as_view()(request)
+        self.client.force_login(user)
+        response = self.client.post(reverse("settings:profile"), {})
 
         self.assertEqual(response.status_code, 302)
 

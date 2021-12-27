@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from photographic.users.models import User
 from photographic.photos.models import Photo
-from photographic.photos.views import DetailView, create_photo
+from photographic.photos.views import DetailView
 from .utils import generate_example_image
 
 
@@ -18,7 +18,7 @@ class TestDetailView(TestCase):
     def test_authentication(self):
         user = User.objects.create_user("bob")
         photo = Photo.objects.create(
-            photographer_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
+            photographer_id=user.id, photo="e120f48d.jpeg"
         )
 
         request = self.rf.get("/p/1")
@@ -31,7 +31,7 @@ class TestDetailView(TestCase):
     def test_no_authentication(self):
         user = User.objects.create_user("bob")
         photo = Photo.objects.create(
-            photographer_id=user.id, photo="e120f48d.jpeg", caption="Example photo"
+            photographer_id=user.id, photo="e120f48d.jpeg"
         )
 
         request = self.rf.get("/p/1")
@@ -43,16 +43,11 @@ class TestDetailView(TestCase):
         self.assertRedirects(response, login_url, fetch_redirect_response=False)
 
 
-class TestCreateView(TestCase):
-    def setUp(self):
-        self.rf = RequestFactory()
-
+class TestUploadPhotoView(TestCase):
     def test_no_authentication(self):
         path = reverse("photos:create")
-        request = self.rf.get(path)
-        request.user = AnonymousUser()
+        response = self.client.get(path)
 
-        response = create_photo(request)
         login_url = settings.LOGIN_URL + "?next=" + path
 
         self.assertRedirects(response, login_url, fetch_redirect_response=False)
@@ -60,10 +55,8 @@ class TestCreateView(TestCase):
     def test_form_shows_when_authenticated(self):
         user = User.objects.create_user("bob")
 
-        request = self.rf.get("/example/path")
-        request.user = user
-
-        response = create_photo(request)
+        self.client.force_login(user)
+        response = self.client.get(reverse("photos:create"))
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Photo:")
@@ -78,10 +71,9 @@ class TestCreateView(TestCase):
             "caption": "Example image",
         }
 
-        request = self.rf.post("/example/path", data)
-        request.user = user
+        self.client.force_login(user)
+        response = self.client.post(reverse("photos:create"), data)
 
-        response = create_photo(request)
         photo = Photo.objects.filter(photographer_id=user.id)[0]
 
         self.assertRedirects(

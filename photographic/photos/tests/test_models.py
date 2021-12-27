@@ -13,7 +13,7 @@ class CommentTest(TestCase):
 
         user = user_model.objects.create_user(username, "bob@example.com", "password")
         photo = Photo.objects.create(
-            photographer_id=user.id, photo=photo_name, caption="Example photo"
+            photographer_id=user.id, photo=photo_name
         )
         comment = Comment.objects.create(content="Lorem ipsum", photo_id=photo.id, author_id=user.id)
 
@@ -29,7 +29,7 @@ class UserTest(TestCase):
 
         user = user_model.objects.create_user(username, "bob@example.com", "password")
         photo = Photo.objects.create(
-            photographer_id=user.id, photo=photo_name, caption="Example photo"
+            photographer_id=user.id, photo=photo_name
         )
 
         self.assertEqual(repr(photo), f"<Photo: {photo_name}>")

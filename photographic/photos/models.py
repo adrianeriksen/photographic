@@ -4,7 +4,6 @@ from django.db import models
 
 class Photo(models.Model):
     photo = models.ImageField()
-    caption = models.TextField()
     photographer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

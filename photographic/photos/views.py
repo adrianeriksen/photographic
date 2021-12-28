@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import generic
 
 from .forms import PhotoForm
 from .models import Comment, Photo
-from .utils import crop_image
 
 
 class ListView(generic.ListView):
@@ -52,25 +52,7 @@ class UploadPhotoView(LoginRequiredMixin, generic.FormView):
     form_class = PhotoForm
     template_name = "photos/photo_form.html"
 
-    photo_id = None
-
     def form_valid(self, form):
-        cropped_photo = crop_image(form.cleaned_data["photo"])
-        current_user = self.request.user
-
-        photo = Photo.objects.create(
-            photo=cropped_photo,
-            photographer=current_user
-        )
-
-        Comment.objects.create(
-            content=form.cleaned_data["caption"],
-            photo=photo,
-            author=current_user
-        )
-
-        self.photo_id = photo.id
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse("photos:detail", args=(self.photo_id,))
+        photo_id = form.create_photo(photographer=self.request.user)
+        success_url = reverse("photos:detail", args=(photo_id,))
+        return HttpResponseRedirect(success_url)

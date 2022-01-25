@@ -31,5 +31,5 @@ class UpdateProfileView(LoginRequiredMixin, generic.edit.UpdateView):
 
     def form_valid(self, form):
         if "photo" in form.changed_data:
-            form.instance.photo.name = "profile-photos/" + str(uuid4()) + ".jpg"
+            form.instance.photo.name = str(uuid4()) + ".jpg"
         return super().form_valid(form)

@@ -14,6 +14,7 @@
         <ul>
             <li><a href="{% url "home" %}">Photographic</a></li>
             {% if user.is_authenticated %}
+            <li><a href="{% url "photos:discover" %}">Discover</a></li>
             <li><a href="{% url "photos:create" %}">Upload new photo</a></li>
             <li><a href="{% url "settings:profile" %}">Settings</a></li>
             <li><a href="{% url "logout" %}">Logout</a></li>

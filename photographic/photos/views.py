@@ -1,4 +1,7 @@
+import random
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -56,3 +59,14 @@ class UploadPhotoView(LoginRequiredMixin, generic.FormView):
         photo_id = form.create_photo(photographer=self.request.user)
         success_url = reverse("photos:detail", args=(photo_id,))
         return HttpResponseRedirect(success_url)
+
+
+def _get_random_users():
+    users = Photo.objects.values("photographer_id").annotate(num_photos=Count('id'))
+    usernames = [user["photographer_id"] for user in users if user["num_photos"] >= 3]
+    return random.sample(usernames, k=2) if len(usernames) > 2 else usernames
+
+
+class DiscoverView(LoginRequiredMixin, generic.ListView):
+    template_name = "photos/photo_list.html"
+    queryset = Photo.objects.order_by("-created_on")[:3]

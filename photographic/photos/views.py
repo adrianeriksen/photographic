@@ -11,11 +11,8 @@ from .forms import PhotoForm
 from .models import Comment, Photo
 
 
-class ListView(generic.ListView):
+class ListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
-        if not self.request.user.is_authenticated:
-            return Photo.objects.order_by("-created_on")[:6]
-
         following = self.request.user.following.all()
         return Photo.objects.filter(photographer__in=following).order_by("-created_on")[:6]
 
@@ -68,5 +65,4 @@ def _get_random_users():
 
 
 class DiscoverView(LoginRequiredMixin, generic.ListView):
-    template_name = "photos/photo_list.html"
     queryset = Photo.objects.order_by("-created_on")[:3]

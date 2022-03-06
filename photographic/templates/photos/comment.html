@@ -1,5 +1,9 @@
 <li class="comment">
-    <img src="{{ comment.author.profile.photo.url }}" alt="" class="comment-profile-photo">
+    {% if comment.author.profile.photo %}
+        <img src="{{ comment.author.profile.photo.url }}" alt="" class="comment-profile-photo">
+    {% else %}
+        <div class="comment-avatar"></div>
+    {% endif %}
     <p class="comment-content">
         <a href="{% url "users:detail" comment.author.username %}">
             <strong>{{ comment.author.username }}</strong>

@@ -214,6 +214,15 @@ div.avatar {
     float: left;
 }
 
+.comments > .comment > .comment-avatar {
+    float: left;
+    background-color: #3d3d3d;
+    height: 45px;
+    width: 45px !important;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .comments > .comment > .comment-content {
     margin-left: 60px;
 }

@@ -8,13 +8,15 @@
     <link rel="shortcut icon" href="{% static "favicon.ico" %}">
     <link rel="stylesheet" href="{% static "style.css" %}">
 </head>
-<body class="app-unauthenticated">
-    <div class="container">
+<body>
+    <div class="container-small login">
         <header>
             <h1>Photographic</h1>
         </header>
-        {% block content %}
-        {% endblock %}
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
     </div>
     <nav class="support-pages">
         <ul>

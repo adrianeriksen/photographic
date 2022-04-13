@@ -1,7 +1,6 @@
-{% extends "base_auth.html" %}
+{% extends "base_login.html" %}
 
 {% block content %}
-<div class="block">
     <form method="post">
         <p>Sign up, rediscover square photographs.</p>
         {{ form.as_p }}
@@ -9,5 +8,4 @@
         <button type="submit">Sign up</button>
     </form>
     <p>Already have an account? <a href="{% url "login" %}">Log in</a></p>
-</div>
 {% endblock %}

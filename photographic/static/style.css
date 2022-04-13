@@ -78,24 +78,32 @@ form .helptext {
     margin: 0.3rem 0;
 }
 
-.app .container {
-    max-width: 720px;
+.container-small,
+.container-normal {
     margin: 0 auto;
+    width: 100%;
 }
 
-.app-unauthenticated .container {
-    max-width: 380px;
-    margin: 0 auto;
+@media screen and (min-width: 580px) and (orientation: landscape) {
+    .container-small {
+        width: 540px;
+    }
 }
 
-.app-unauthenticated .container h1 {
+@media screen and (min-width: 760px) and (orientation: landscape) {
+    .container-normal {
+        width: 720px;
+    }
+}
+
+.login h1 {
     text-align: center;
     font-weight: 300;
 }
 
-.wide-container {
-    max-width: 860px;
-    margin: 0 auto;
+.login .content {
+    background-color: #ffffff;
+    padding: 1rem 4rem;
 }
 
 a {

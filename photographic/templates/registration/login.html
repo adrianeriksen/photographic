@@ -1,12 +1,10 @@
-{% extends "base_auth.html" %}
+{% extends "base_login.html" %}
 
 {% block content %}
-    <div class="block">
-        <form action="{{ request.get_full_path }}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button>Log in</button>
-        </form>
-        <p>Don't have an account? <a href="{% url "users:signup" %}">Sign up</a></p>
-    </div>
+    <form action="{{ request.get_full_path }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Log in</button>
+    </form>
+    <p>Don't have an account? <a href="{% url "users:signup" %}">Sign up</a></p>
 {% endblock %}

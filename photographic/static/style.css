@@ -96,6 +96,19 @@ form .helptext {
     }
 }
 
+.container-navbar {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 840px) and (orientation: landscape) {
+    .container-navbar {
+        width: 800px;
+    }
+}
+
 .login h1 {
     text-align: center;
     font-weight: 300;
@@ -115,21 +128,21 @@ a:hover {
     color: #0093f2;
 }
 
-.header {
+.navbar {
     background-color: white;
     border-bottom: 1px solid #ccc;
     margin-bottom: 1rem;
 }
 
-.header ul {
+.navbar ul {
     list-style-type: none;
     padding: 1rem 0;
     margin: 0;
 }
 
-.header ul li {
+.navbar ul li {
     display: inline-block;
-    margin-left: 1.2rem;
+    margin: 0 0.6rem;
 }
 
 .photo-container {

@@ -1,7 +1,9 @@
-<div class="header">
-    <div class="container-normal">
+<nav class="navbar">
+    <div class="container-navbar">
         <ul>
             <li><a href="{% url "home" %}">Photographic</a></li>
+        </ul>
+        <ul>
             {% if user.is_authenticated %}
             <li><a href="{% url "photos:discover" %}">Discover</a></li>
             <li><a href="{% url "photos:create" %}">Upload new photo</a></li>
@@ -13,4 +15,4 @@
             {% endif %}
         </ul>
     </div>
-</div>
+</nav>

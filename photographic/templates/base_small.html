@@ -9,15 +9,11 @@
     <link rel="stylesheet" href="{% static "style.css" %}">
 </head>
 <body>
-    <div class="container-small login">
-        <header>
-            <h1>Photographic</h1>
-        </header>
-        <section class="content">
-            {% block content %}
-            {% endblock %}
-        </section>
-    </div>
-    {% include "shared/support_pages.html" %}
+{% include "shared/header.html" %}
+<div class="container-small">
+    {% block content %}
+    {% endblock %}
+</div>
+{% include "shared/support_pages.html" %}
 </body>
 </html>

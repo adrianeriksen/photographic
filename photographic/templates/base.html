@@ -8,33 +8,12 @@
     <link rel="shortcut icon" href="{% static "favicon.ico" %}">
     <link rel="stylesheet" href="{% static "style.css" %}">
 </head>
-<body class="app">
-<div class="header">
-    <div class="container-normal">
-        <ul>
-            <li><a href="{% url "home" %}">Photographic</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url "photos:discover" %}">Discover</a></li>
-            <li><a href="{% url "photos:create" %}">Upload new photo</a></li>
-            <li><a href="{% url "settings:profile" %}">Settings</a></li>
-            <li><a href="{% url "logout" %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url "users:signup" %}">Sign up</a></li>
-            <li><a href="{% url "login" %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
+<body>
+{% include "shared/header.html" %}
 <div class="container-normal">
     {% block content %}
     {% endblock %}
-    <nav class="support-pages">
-        <ul>
-            <li><a href="{% url "cookie-policy" %}">Cookie policy</a></li>
-            <li><a href="{% url "privacy-policy" %}">Privacy policy</a></li>
-        </ul>
-        <p>© Photographic by Aer Development</p>
-    </nav>
 </div>
+{% include "shared/support_pages.html" %}
 </body>
 </html>

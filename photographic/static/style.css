@@ -130,7 +130,7 @@ a:hover {
 
 .navbar {
     background-color: white;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e2e8f0;
     margin-bottom: 1rem;
 }
 
@@ -160,6 +160,14 @@ a:hover {
 .photo-container > article img {
     width: 100%;
     display: block;
+}
+
+.single-photo {
+    background-color: #ffffff;
+}
+
+.single-photo > .photo img {
+    width: 100%;
 }
 
 .photo-detail {
@@ -252,36 +260,55 @@ div.avatar {
     display: inline-block;
 }
 
-.comments {
+.photo-actions {
+    margin: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.photo-actions p {
+    margin: 0;
+}
+
+.photo-actions .photo-information {
+    color: #334155;
+}
+
+.photo-comments {
+    margin: 1rem 2rem;
+}
+
+.photo-comments ul {
     list-style-type: none;
     padding: 0 1rem 0 0;
 }
 
-.comments > .comment > .comment-profile-photo {
+.photo-comments > ul > .comment {
+    margin: 1.6em 0;
+}
+
+.photo-comments > ul .comment > .comment-profile-photo {
     float: left;
 }
 
-.comments > .comment > .comment-avatar {
+.photo-comments > ul > .comment > .comment-avatar {
     float: left;
-    background-color: #3d3d3d;
+    background-color: #334155;
     height: 45px;
     width: 45px !important;
     border-radius: 50%;
     display: inline-block;
 }
 
-.comments > .comment > .comment-content {
+.photo-comments > ul > .comment > .comment-content {
     margin-left: 60px;
+    margin-bottom: 0.4em;
 }
 
-.comments > .comment > .comment-date {
+.photo-comments > ul > .comment > .comment-date {
+    margin-top: 0.4em;
     margin-left: 60px;
-    color: #3d3d3d;
-    font-size: 80%;
-}
-
-.photo-date {
-    color: #3d3d3d;
+    color: #334155;
     font-size: 80%;
 }
 

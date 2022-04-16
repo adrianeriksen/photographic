@@ -1,20 +1,25 @@
-{% extends "base.html" %}
+{% extends "base_small.html" %}
 
 {% block content %}
-<article class="photo-{{ photo.id }} photo-detail">
-    <div>
+<article id="photo-{{ photo.id }}" class="single-photo">
+    <div class="photo">
         <img src="{{ photo.photo.url }}" alt="">
     </div>
-    <div>
-        <ul class="comments">
+    <div class="photo-actions">
+        <p>
+            <a href="{% url "photos:create_comment" photo.id %}">Share a comment</a>
+        </p>
+        <p class="photo-information">
+            {{ photo.photographer.username }} | {{ photo.created_on|date:"Y-m-d" }}
+        </p>
+    </div>
+    <div class="photo-comments">
+        <ul>
             {% for comment in comments %}
             {% include "photos/comment.html" with comment=comment only %}
             {% endfor %}
         </ul>
-        <p>
-            <a href="{% url "photos:create_comment" photo.id %}">Share a comment</a>
-        </p>
-        <p class="photo-date">{{ photo.created_on|date:"Y-m-d" }}</p>
     </div>
+    <div style="height: 1px;"></div>
 </article>
 {% endblock %}

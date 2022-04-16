@@ -1,17 +1,29 @@
 {% extends "base_small.html" %}
 
 {% block content %}
-<div class="box">
-    <h1>Share a comment</h1>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
+<article id="photo-{{ photo.id }}" class="single-photo">
+    <div class="photo">
+        <img src="{{ photo.photo.url }}" alt="">
+    </div>
+    <div class="photo-actions">
         <p>
-            <button type="submit">Comment</button>
+            <a href="{% url "photos:create_comment" photo.id %}">Share a comment</a>
         </p>
-        <p>
-            <a href="{% url "photos:detail" photo_id %}">Back to photo</a>
+        <p class="photo-information">
+            {{ photo.photographer.username }} | {{ photo.created_on|date:"Y-m-d" }}
         </p>
-    </form>
-</div>
+    </div>
+    <section class="comment-form">
+        <form method="post">
+            <textarea name="content" cols="40" rows="6" required="" id="id_content" placeholder="Add a comment..." autofocus></textarea>
+            {% csrf_token %}
+            <p>
+                <button type="submit">Comment</button>
+            </p>
+            <p>
+                <a href="{% url "photos:detail" photo.id %}">Back to photo</a>
+            </p>
+        </form>
+    </section>
+</article>
 {% endblock %}

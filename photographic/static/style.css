@@ -312,6 +312,10 @@ div.avatar {
     font-size: 80%;
 }
 
+.comment-form {
+    margin: 1rem 2rem;
+}
+
 .layout-wrapper {
     background-color: #ffffff;
 }

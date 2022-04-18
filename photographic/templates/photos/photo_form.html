@@ -3,11 +3,21 @@
 {% block content %}
 <div class="box">
     <form action="{% url "photos:create" %}" method="post" enctype="multipart/form-data">
-        <h1>Create new photo post</h1>
+        <h1>Upload new photo</h1>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
         <p>
-            <button type="submit">Create photo</button>
+            {{ form.photo.errors }}
+            <label for="{{ form.photo.id_for_label }}">Photo</label>
+            {{ form.photo }}
+        </p>
+        <p>
+            {{ form.caption.errors }}
+            <label for="{{ form.caption.id_for_label }}">Caption</label>
+            <textarea name="caption" rows="4" id="{{ form.caption.id_for_label }}"></textarea>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
         </p>
     </form>
 </div>

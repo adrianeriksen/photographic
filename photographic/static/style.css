@@ -38,25 +38,30 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="email"],
 input[type="password"]:focus,
 textarea:focus {
     border-color: #0074bf;
     outline: none;
 }
 
+textarea {
+    font-family: inherit;
+}
+
 button {
-    background-color: #0074bf;
+    background-color: #334155;
     color: #ffffff;
     border: none;
     font-family: inherit;
-    font-size: 105%;
-    padding: 0.5rem 1.4rem;
-    border-radius: 4px;
+    font-size: 100%;
+    padding: 0.4rem 1.4rem;
+    border-radius: 3px;
 }
 
 button:hover,
 button:focus {
-    background-color: #0093f2;
+    background-color: #1e293b;
     outline: none;
 }
 
@@ -120,12 +125,12 @@ form .helptext {
 }
 
 a {
-    color: #0074bf;
+    color: #075985;
     text-decoration: none;
 }
 
 a:hover {
-    color: #0093f2;
+    color: #0284c7;
 }
 
 .navbar {

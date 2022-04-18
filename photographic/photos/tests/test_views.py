@@ -59,9 +59,9 @@ class TestUploadPhotoView(TestCase):
         response = self.client.get(reverse("photos:create"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Photo:")
-        self.assertContains(response, "Caption:")
-        self.assertNotContains(response, "Author:")
+        self.assertContains(response, "Photo")
+        self.assertContains(response, "Caption")
+        self.assertNotContains(response, "Author")
 
     def test_submit_new_photo(self):
         user = User.objects.create_user("jonas")

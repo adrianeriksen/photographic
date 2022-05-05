@@ -1,20 +1,10 @@
-{% extends "base.html" %}
+{% extends "settings/base_settings.html" %}
 
 {% block content %}
-<div class="layout-wrapper">
-    <div class="menu">
-        <ul>
-            <li><a href="{% url "settings:profile" %}">Profile</a></li>
-            <li><a href="{% url "settings:password" %}">Password</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <form method="post" enctype="multipart/form-data">
-            <h1>Update profile</h1>
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit">Update profile</button>
-        </form>
-    </div>
-</div>
+    <form method="post" enctype="multipart/form-data">
+        <h1>Update profile</h1>
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Update profile</button>
+    </form>
 {% endblock %}

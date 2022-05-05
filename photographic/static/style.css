@@ -321,37 +321,24 @@ div.avatar {
     margin: 1rem 2rem;
 }
 
-.layout-wrapper {
+.sidebar-layout {
     background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    padding: 0 30px;
 }
 
-.layout-wrapper:after {
-    clear: both;
-    content: "";
-    display: table;
+.sidebar-layout .content {
+    margin-bottom: 1em;
 }
 
-.layout-wrapper > .menu {
-    float: left;
-    width: 29.9999%;
-}
-
-.layout-wrapper > .menu > ul {
+.sidebar-nav ul {
     list-style-type: none;
     padding: 0;
 }
 
-.layout-wrapper > .menu > ul li {
-    border-bottom: 1px solid #cccccc;
-}
-
-.layout-wrapper > .menu > ul li a {
-    padding: 0.5rem 0.8rem;
+.sidebar-nav ul li a {
+    padding: 0.5rem 0;
     display: block;
-}
-
-.layout-wrapper > .content {
-    float: left;
-    width: 69.9999%;
-    padding: 0 30px;
 }

@@ -11,7 +11,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["photographic.aer.dev"]
+ALLOWED_HOSTS = ["127.0.0.1", "photographic.aer.dev"]
 
 
 # Database
@@ -29,26 +29,18 @@ DATABASES = {
 }
 
 
-# Cloud storage configuration
-
-AWS_S3_REGION_NAME = os.environ["AWS_S3_REGION_NAME"]
-AWS_S3_ENDPOINT_URL = os.environ["AWS_S3_ENDPOINT_URL"]
-
-
 # Media
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-root
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-url
 
-DEFAULT_FILE_STORAGE = "config.storages.MediaStorage"
-
-MEDIA_URL = os.environ["MEDIA_STORAGE_URL"]
+MEDIA_ROOT = os.environ["MEDIA_ROOT"]
+MEDIA_URL = os.environ["MEDIA_URL"]
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_STORAGE = "config.storages.StaticStorage"
-
 STATICFILES_DIRS = [APPS_DIR / "static"]
 
-STATIC_URL = os.environ["STATIC_STORAGE_URL"]
+STATIC_ROOT = os.environ["STATIC_ROOT"]
+STATIC_URL = os.environ["STATIC_URL"]

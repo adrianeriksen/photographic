@@ -13,6 +13,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "photographic.aer.dev"]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

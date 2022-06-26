@@ -100,6 +100,26 @@ resource "aws_db_subnet_group" "photographic_db_subnet_group" {
   ]
 }
 
+resource "aws_route_table_association" "public_a_association" {
+  subnet_id      = aws_subnet.photographic_subnet_public_a.id
+  route_table_id = aws_route_table.photographic_rtb_public.id
+}
+
+resource "aws_route_table_association" "public_b_association" {
+  subnet_id      = aws_subnet.photographic_subnet_public_b.id
+  route_table_id = aws_route_table.photographic_rtb_public.id
+}
+
+resource "aws_route_table_association" "private_a_association" {
+  subnet_id      = aws_subnet.photographic_subnet_private_a.id
+  route_table_id = aws_route_table.photographic_rtb_private.id
+}
+
+resource "aws_route_table_association" "private_b_association" {
+  subnet_id      = aws_subnet.photographic_subnet_private_b.id
+  route_table_id = aws_route_table.photographic_rtb_private.id
+}
+
 resource "aws_security_group" "web" {
   name        = "web"
   description = "Allow public access over HTTP/HTTPS and management from defined IPs"

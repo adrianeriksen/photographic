@@ -103,6 +103,7 @@ resource "aws_db_subnet_group" "photographic_db_subnet_group" {
 resource "aws_security_group" "web" {
   name        = "web"
   description = "Allow public access over HTTP/HTTPS and management from defined IPs"
+  vpc_id      = aws_vpc.photographic_vpc.id
 
   ingress {
     description = "Public HTTP"
@@ -148,6 +149,7 @@ resource "aws_security_group" "web" {
 resource "aws_security_group" "database" {
   name        = "database"
   description = "Allow access from web security group"
+  vpc_id      = aws_vpc.photographic_vpc.id
 
   ingress {
     description     = "PostgreSQL from web security group"

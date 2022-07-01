@@ -57,6 +57,8 @@ resource "aws_subnet" "photographic_subnet_public_a" {
   cidr_block        = "10.0.0.0/24"
   availability_zone = "eu-north-1a"
 
+  map_public_ip_on_launch = true
+
   tags = {
     Name = "photographic-subnet-public-eu-north-1a"
   }
@@ -66,6 +68,8 @@ resource "aws_subnet" "photographic_subnet_public_b" {
   vpc_id            = aws_vpc.photographic_vpc.id
   cidr_block        = "10.0.1.0/24"
   availability_zone = "eu-north-1b"
+
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "photographic-subnet-public-eu-north-1b"

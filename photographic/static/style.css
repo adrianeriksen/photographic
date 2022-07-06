@@ -13,6 +13,10 @@ body {
     margin: 0;
 }
 
+h1 {
+    font-weight: 300;
+}
+
 label {
     display: block;
     margin-bottom: 0.4rem;
@@ -341,4 +345,8 @@ div.avatar {
 .sidebar-nav ul li a {
     padding: 0.5rem 0;
     display: block;
+}
+
+.settings-nav {
+    margin-top: 4.5em;
 }

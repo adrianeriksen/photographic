@@ -274,3 +274,6 @@ tags
 ### Project specific
 # Media
 photographic/media/
+
+### 
+.env

@@ -274,6 +274,8 @@ tags
 ### Project specific
 # Media
 photographic/media/
+webserver/
 
-### 
+# Environment
 .env
+.env.production

@@ -1,0 +1,4 @@
+#!/bin/bash -e
+pipenv run python manage.py migrate
+pipenv run python manage.py collectstatic
+pipenv run gunicorn -b 0.0.0.0 config.wsgi

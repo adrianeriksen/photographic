@@ -1,0 +1,5 @@
+# Ignore git directory
+/.git/
+
+# Ignore all environment files
+/.env*

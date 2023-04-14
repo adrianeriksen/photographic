@@ -12,3 +12,6 @@ RUN mkdir -p /var/photographic/media
 RUN mkdir -p /var/photographic/static
 
 COPY . .
+
+ENTRYPOINT ["/usr/bin/photographic/docker-entrypoint"]
+EXPOSE 8000

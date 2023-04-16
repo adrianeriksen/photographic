@@ -237,31 +237,6 @@ div.avatar {
     display: inline-block;
 }
 
-.support-pages {
-    font-size: 80%;
-    text-align: center;
-    margin: 2em 0;
-    color: #52525b;
-}
-
-.support-pages a {
-    color: #52525b;
-}
-
-.support-pages a:hover {
-    color: #1e293b;
-}
-
-.support-pages ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.support-pages ul li {
-    display: inline-block;
-    margin: 0 0.6em;
-}
-
 .comment-profile-photo {
     height: 45px;
     width: 45px !important;
